@@ -15,6 +15,7 @@ and variant =
     | CommandPalette
     | EditorsPicker
     | FilesPicker
+    | LicenseKeyInput
     | Wildmenu(Vim.Types.cmdlineType)
     | ThemesPicker(list(Feature_Theme.theme))
     | FileTypesPicker({
@@ -35,6 +36,7 @@ let placeholderText =
   | ThemesPicker(_)
   | CommandPalette
   | DocumentSymbols => "type to search..."
+  | LicenseKeyInput => "enter Oni2 license key"
   | _ => "";
 
 let defaults = variant => {

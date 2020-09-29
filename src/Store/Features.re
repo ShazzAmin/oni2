@@ -1208,6 +1208,24 @@ let update =
 
     ({...state, autoUpdate: state'}, eff);
 
+  | Registration(msg) =>
+    let (state', outmsg) =
+      Feature_Registration.update(state.registration, msg);
+
+    let eff =
+      switch (outmsg) {
+      | Nothing => Isolinear.Effect.none
+      | Effect(eff) =>
+        eff |> Isolinear.Effect.map(msg => Actions.Registration(msg))
+      | ShowLicenseKeyInput =>
+        Isolinear.Effect.createWithDispatch(
+          ~name="registration.showLicenseKeyInput", dispatch =>
+          dispatch(QuickmenuShow(LicenseKeyInput))
+        )
+      };
+
+    ({...state, registration: state'}, eff);
+
   | _ => (state, Effect.none)
   };
 

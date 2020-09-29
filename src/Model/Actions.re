@@ -110,6 +110,7 @@ type t =
       lines: array(string),
     })
   | Registers(Feature_Registers.msg)
+  | Registration(Feature_Registration.msg)
   | QuitBuffer([@opaque] Vim.Buffer.t, bool)
   | Quit(bool)
   // ReallyQuitting is dispatched when we've decided _for sure_
@@ -184,6 +185,7 @@ and quickmenuVariant =
   | CommandPalette
   | EditorsPicker
   | FilesPicker
+  | LicenseKeyInput
   | Wildmenu([@opaque] Vim.Types.cmdlineType)
   | ThemesPicker([@opaque] list(Feature_Theme.theme))
   | FileTypesPicker({

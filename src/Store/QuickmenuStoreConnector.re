@@ -237,6 +237,8 @@ let start = () => {
         Isolinear.Effect.none,
       );
 
+    | QuickmenuShow(LicenseKeyInput) => (None, Isolinear.Effect.none)
+
     | QuickmenuShow(FileTypesPicker({bufferId, languages})) =>
       let items =
         languages
@@ -576,6 +578,8 @@ let subscriptions = (ripgrep, dispatch) => {
       | CommandPalette
       | EditorsPicker
       | ThemesPicker(_) => [filter(query, quickmenu.items)]
+
+      | LicenseKeyInput => []
 
       | Extension({hasItems, _}) =>
         hasItems ? [filter(query, quickmenu.items)] : []
