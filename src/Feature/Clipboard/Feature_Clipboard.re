@@ -44,7 +44,7 @@ let update = (msg, model) => {
   | PasteClipboardEmpty => (model, Nothing)
   | PasteClipboardText({text}) =>
     let (isMultiLine, lines) = StringEx.splitLines(text);
-    (model, Pasted({isMultiLine, lines, rawText: text}));
+    (model, Pasted({isMultiLine, lines, rawText: text |> StringEx.removeWindowsNewLines}));
   };
 };
 
